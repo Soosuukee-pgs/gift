@@ -12,7 +12,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
-  height: 70vh; /* Initialement à 70vh */
+  height: 70vh; /* Hauteur initiale */
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -20,27 +20,28 @@ header {
   padding: 20px;
   box-sizing: border-box;
   overflow: hidden;
+  transition: height 0.1s ease-out;
 }
 
 #cover {
-  width: 100%; /* Initialement à 100% */
-  height: 100%; /* Initialement à 100% */
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
-  transition: none; /* Les dimensions sont contrôlées via JS */
+  transition: width 0.1s ease-out, height 0.1s ease-out;
 }
 
 #song-details {
   position: relative;
   color: white;
-  transition: transform 0.1s linear, opacity 0.1s linear; /* Déplacement et opacité fluide */
+  transition: transform 0.1s ease-out, font-size 0.1s ease-out;
 }
 
 #title {
-  font-size: 2.5rem;
+  font-size: 2.5rem; /* Taille initiale */
   margin: 0;
 }
 
@@ -50,41 +51,78 @@ header {
   opacity: 0.8;
 }
 
+/* Fenêtre nette (désactivée visuellement mais utilisée pour logique) */
+.window {
+  position: fixed;
+  top: 50%; /* Centré verticalement */
+  left: 0;
+  width: 100%;
+  height: 200px; /* Taille de la fenêtre visible */
+  transform: translateY(-50%);
+  pointer-events: none; /* Empêche l'interaction */
+  z-index: 5;
+  overflow: hidden; /* Masque les lignes floues hors de la fenêtre */
+  visibility: hidden; /* Invisible pour l'utilisateur */
+}
+
 /* Paroles */
 main {
-  height: calc(
-    100vh - 60px
-  ); /* Prend tout l'espace disponible en dessous du header réduit */
-  overflow-y: scroll; /* Active le défilement vertical */
+  height: calc(100vh - 20vh); /* Ajuste pour inclure le header */
+  overflow-y: scroll;
   background: #222;
-  padding: 20px;
+  padding: 20px 0; /* Ajout d'un padding en haut et bas */
   box-sizing: border-box;
+  position: relative;
 }
 
 .lyrics {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 200px 20px; /* Ajout de padding en haut et bas */
+  position: relative;
 }
 
 .lyrics li {
-  margin: 20px 0;
-  font-size: 1.2rem;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, color 0.3s ease; /* Animation fluide pour la surbrillance */
+  font-size: 2rem;
+  line-height: 2.8rem;
+  font-weight: 700;
+  margin: 10px 0;
+  opacity: 0.6; /* Texte partiellement visible même flou */
+  filter: blur(6px); /* Flou pour les lignes non actives */
+  transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* Masquer complètement les lignes floues hors de la fenêtre */
+.lyrics li.hidden {
+  opacity: 0;
+  pointer-events: none; /* Empêche toute interaction */
+}
+
+/* Mise en avant des lignes actives */
 .lyrics li.active {
+  filter: blur(0); /* Texte clair */
   opacity: 1;
-  color: #2385d0;
-  font-weight: bold;
+  transform: scale(1.05); /* Légère mise en avant */
+  color: white; /* Texte actif en blanc */
+  font-weight: 900; /* Plus imposant pour le focus */
 }
 
-/* Debug (à enlever si inutile) */
-header {
-  outline: 2px solid red; /* Permet de visualiser les limites du header */
-}
+/* Responsivité */
+@media (max-width: 768px) {
+  #title {
+    font-size: 1.8rem; /* Plus petit pour mobile */
+  }
 
-main {
-  outline: 2px solid green; /* Permet de visualiser les limites de la zone scrollable */
+  #artist {
+    font-size: 0.9rem;
+  }
+
+  header {
+    height: 60vh; /* Hauteur initiale plus petite */
+  }
+
+  .lyrics li {
+    font-size: 1.8rem; /* Taille ajustée pour mobile */
+    line-height: 2.4rem; /* Espacement ajusté pour mobile */
+  }
 }

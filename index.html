@@ -7,10 +7,24 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <!-- Overlay du papier cadeau -->
+    <div id="gift-wrap">
+      <div id="gift-ribbon">
+        <div class="ribbon-horizontal"></div>
+        <div class="ribbon-vertical"></div>
+      </div>
+      <div class="gift-piece top"></div>
+      <div class="gift-piece bottom"></div>
+      <div class="gift-piece left"></div>
+      <div class="gift-piece right"></div>
+      <button id="open-gift">Ouvrir le cadeau 🎁</button>
+    </div>
+
+    <!-- Projet : Défilement des paroles -->
     <header id="header">
       <img
         id="cover"
-        src="images/Sukuna.jpg"
+        src="images/DALL·E 2024-12-16 22.00.30 - Create a highly detailed manga-style illustration of a powerful and mysterious female warrior with long, sleek black hair, intense red eyes featuring .webp"
         alt="Cover"
         onerror="this.src='https://via.placeholder.com/300x300';"
       />
@@ -20,6 +34,8 @@
       </div>
     </header>
     <main>
+      <!-- Fenêtre nette (zone délimitée) -->
+      <div class="window"></div>
       <ul class="lyrics">
         <!-- Paroles ajoutées -->
         <li>Once upon a time in the night</li>
@@ -49,7 +65,6 @@
         <li>The moon was guiding me</li>
       </ul>
     </main>
-    <!-- Chemin corrigé -->
     <script src="./scrypt.js"></script>
   </body>
 </html>
