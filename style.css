@@ -78,7 +78,7 @@ main {
 .lyrics {
   list-style: none;
   margin: 0;
-  padding: 200px 20px; /* Ajout de padding en haut et bas */
+  padding: 200px 20px 500px 20px; /* Ajout de padding en haut et bas */
   position: relative;
 }
 
@@ -105,6 +105,104 @@ main {
   transform: scale(1.05); /* Légère mise en avant */
   color: white; /* Texte actif en blanc */
   font-weight: 900; /* Plus imposant pour le focus */
+}
+/* Papier cadeau */
+#gift-wrap {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background-color: #66c2c2; /* Turquoise moins flashy */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.gift-piece {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: #66c2c2; /* Turquoise moins flashy */
+  border: 2px solid #ff69b4; /* Ruban rose */
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.gift-piece.top {
+  top: 0;
+  left: 0;
+  transform-origin: bottom right;
+}
+
+.gift-piece.bottom {
+  bottom: 0;
+  left: 0;
+  transform-origin: top right;
+}
+
+.gift-piece.left {
+  top: 0;
+  left: 0;
+  transform-origin: bottom left;
+}
+
+.gift-piece.right {
+  top: 0;
+  right: 0;
+  transform-origin: bottom left;
+}
+
+/* Ruban rose */
+#gift-ribbon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+}
+
+.ribbon-horizontal,
+.ribbon-vertical {
+  position: absolute;
+  background-color: #ff69b4; /* Ruban rose */
+  z-index: 102;
+}
+
+.ribbon-horizontal {
+  width: 100%;
+  height: 20px;
+  top: 50%; /* Centré verticalement */
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.ribbon-vertical {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 50%; /* Centré horizontalement */
+  transform: translateX(-50%);
+}
+
+/* Bouton pour ouvrir */
+#open-gift {
+  position: relative;
+  top: 20px; /* Décalé vers le bas uniquement */
+  z-index: 103;
+  background-color: #fff;
+  color: #ff69b4;
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#open-gift:hover {
+  transform: scale(1.1);
 }
 
 /* Responsivité */
