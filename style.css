@@ -41,7 +41,7 @@ header {
 }
 
 #title {
-  font-size: 2.5rem; /* Taille initiale */
+  font-size: 2.5rem;
   margin: 0;
 }
 
@@ -51,34 +51,21 @@ header {
   opacity: 0.8;
 }
 
-/* Fenêtre nette (désactivée visuellement mais utilisée pour logique) */
-.window {
-  position: fixed;
-  top: 50%; /* Centré verticalement */
-  left: 0;
-  width: 100%;
-  height: 200px; /* Taille de la fenêtre visible */
-  transform: translateY(-50%);
-  pointer-events: none; /* Empêche l'interaction */
-  z-index: 5;
-  overflow: hidden; /* Masque les lignes floues hors de la fenêtre */
-  visibility: hidden; /* Invisible pour l'utilisateur */
-}
-
-/* Paroles */
+/* Main */
 main {
-  height: calc(100vh - 20vh); /* Ajuste pour inclure le header */
+  height: calc(100vh - 20vh);
   overflow-y: scroll;
   background: #222;
-  padding: 20px 0; /* Ajout d'un padding en haut et bas */
+  padding: 20px 0;
   box-sizing: border-box;
   position: relative;
 }
 
+/* Paroles */
 .lyrics {
   list-style: none;
   margin: 0;
-  padding: 200px 20px 500px 20px; /* Ajout de padding en haut et bas */
+  padding: 150px 20px 320px 20px; /* Padding pour afficher les premières et dernières lignes */
   position: relative;
 }
 
@@ -87,25 +74,17 @@ main {
   line-height: 2.8rem;
   font-weight: 700;
   margin: 10px 0;
-  opacity: 0.6; /* Texte partiellement visible même flou */
-  filter: blur(6px); /* Flou pour les lignes non actives */
-  transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+  visibility: hidden; /* Rend les lignes invisibles par défaut */
+  opacity: 0; /* Transparence complète */
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
 }
 
-/* Masquer complètement les lignes floues hors de la fenêtre */
-.lyrics li.hidden {
-  opacity: 0;
-  pointer-events: none; /* Empêche toute interaction */
+.lyrics li.visible {
+  visibility: visible; /* Rend visible */
+  opacity: 1; /* Apparition progressive */
+  transform: scale(1.05); /* Effet léger de mise en avant */
 }
 
-/* Mise en avant des lignes actives */
-.lyrics li.active {
-  filter: blur(0); /* Texte clair */
-  opacity: 1;
-  transform: scale(1.05); /* Légère mise en avant */
-  color: white; /* Texte actif en blanc */
-  font-weight: 900; /* Plus imposant pour le focus */
-}
 /* Papier cadeau */
 #gift-wrap {
   position: fixed;
@@ -114,7 +93,7 @@ main {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  background-color: #66c2c2; /* Turquoise moins flashy */
+  background-color: #66c2c2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,8 +105,8 @@ main {
   position: absolute;
   width: 50%;
   height: 50%;
-  background-color: #66c2c2; /* Turquoise moins flashy */
-  border: 2px solid #ff69b4; /* Ruban rose */
+  background-color: #66c2c2;
+  border: 2px solid #ff69b4;
   transition: transform 1s ease-out, opacity 1s ease-out;
 }
 
@@ -155,41 +134,9 @@ main {
   transform-origin: bottom left;
 }
 
-/* Ruban rose */
-#gift-ribbon {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 101;
-}
-
-.ribbon-horizontal,
-.ribbon-vertical {
-  position: absolute;
-  background-color: #ff69b4; /* Ruban rose */
-  z-index: 102;
-}
-
-.ribbon-horizontal {
-  width: 100%;
-  height: 20px;
-  top: 50%; /* Centré verticalement */
-  left: 0;
-  transform: translateY(-50%);
-}
-
-.ribbon-vertical {
-  width: 20px;
-  height: 100%;
-  top: 0;
-  left: 50%; /* Centré horizontalement */
-  transform: translateX(-50%);
-}
-
-/* Bouton pour ouvrir */
 #open-gift {
   position: relative;
-  top: 20px; /* Décalé vers le bas uniquement */
+  top: 20px;
   z-index: 103;
   background-color: #fff;
   color: #ff69b4;
@@ -205,22 +152,12 @@ main {
   transform: scale(1.1);
 }
 
-/* Responsivité */
-@media (max-width: 768px) {
-  #title {
-    font-size: 1.8rem; /* Plus petit pour mobile */
-  }
+/* Scrollbar stylisée (optionnel) */
+main::-webkit-scrollbar {
+  width: 10px;
+}
 
-  #artist {
-    font-size: 0.9rem;
-  }
-
-  header {
-    height: 60vh; /* Hauteur initiale plus petite */
-  }
-
-  .lyrics li {
-    font-size: 1.8rem; /* Taille ajustée pour mobile */
-    line-height: 2.4rem; /* Espacement ajusté pour mobile */
-  }
+main::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 5px;
 }
